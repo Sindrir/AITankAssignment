@@ -48,6 +48,9 @@ public class GraphUpdater : MonoBehaviour
             // look through the adjacent nodes
             foreach(var adjacentNode in node.Adjacent)
             {
+                if (node == adjacentNode)
+                    continue;
+
                 if (_graph.Edges == null)
                     continue;
 
