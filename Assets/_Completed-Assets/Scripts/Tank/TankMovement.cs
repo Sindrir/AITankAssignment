@@ -20,6 +20,12 @@ namespace Complete
         private float m_OriginalPitch;              // The pitch of the audio source at the start of the scene.
         private ParticleSystem[] m_particleSystems; // References to all the particles systems used by the Tanks
 
+
+        // PERSONAL VARIABLES
+        [SerializeField]
+        private GraphNode _targetNode;
+
+
         private void Awake ()
         {
             m_Rigidbody = GetComponent<Rigidbody> ();
@@ -73,11 +79,61 @@ namespace Complete
         private void Update ()
         {
             // Store the value of both input axes.
-            m_MovementInputValue = Input.GetAxis (m_MovementAxisName);
-            m_TurnInputValue = Input.GetAxis (m_TurnAxisName);
+            //m_MovementInputValue = Input.GetAxis (m_MovementAxisName);
+            //m_TurnInputValue = Input.GetAxis (m_TurnAxisName);
+            m_MovementInputValue = 1;
+            if (_targetNode != null)
+            {
+                var targetDistance = _targetNode.gameObject.transform.position - transform.position;
+                var targetDirection = targetDistance;
+
+                var tankRotationEuler = m_Rigidbody.transform.rotation.eulerAngles;
+                var targetRotationEuler = Quaternion.LookRotation(targetDirection, Vector3.up).eulerAngles;
+                //var deltaRotation = tankRotationEuler - targetRotationEuler;
+                //var deltaR = Vector3.Cross(tankRotationEuler, targetRotationEuler).normalized;
+                var deltaRy = targetRotationEuler.y - tankRotationEuler.y;
+                //Debug.Log(deltaRy);
+                if ((deltaRy > 10 && deltaRy < 180) || deltaRy < -180)
+                {
+                    m_TurnInputValue = 0.5f;
+                } else if ((deltaRy < -10 && deltaRy > -180) || deltaRy > 180)
+                {
+                    m_TurnInputValue = -0.5f;
+                } else
+                {
+                    m_TurnInputValue = 0;
+                }
+
+                var distance = Mathf.Sqrt(Mathf.Pow(targetDistance.x, 2) + Mathf.Pow(targetDistance.y, 2));
+                Debug.Log(distance);
+                if (distance < 0.52f)
+                {
+                    m_MovementInputValue = 0;
+                    _targetNode = _targetNode.Adjacent[0];
+                }
+
+                
+
+
+                //_turret.transform.rotation = Quaternion.LookRotation(targetDirection, Vector3.up);
+
+                //m_TurnInputValue = targetDirection.x + targetDirection.z;
+            }
+
+
 
             EngineAudio ();
         }
+        /*
+        GraphNode FindNextNode()
+        {
+
+            return newNode;
+        }
+        */
+        /* Richards turret turn function
+        
+         */
 
 
         private void EngineAudio ()
