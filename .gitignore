@@ -1,1 +1,16 @@
-# Add any directories, files, or patterns you don't want to be tracked by version control
+Library/
+obj/
+Builds/
+Temp/
+.git/*
+.vs/*
+*.unityproj
+*.csproj
+*.got
+*.sln
+*.userprefs
+*.suo
+*.db
+*.db.meta
+Assets/GitIgnore/
+Assets/GitIgnore.meta
