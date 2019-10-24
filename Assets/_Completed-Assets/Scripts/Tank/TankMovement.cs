@@ -93,10 +93,10 @@ namespace Complete
                 //var deltaR = Vector3.Cross(tankRotationEuler, targetRotationEuler).normalized;
                 var deltaRy = targetRotationEuler.y - tankRotationEuler.y;
                 //Debug.Log(deltaRy);
-                if ((deltaRy > 10 && deltaRy < 180) || deltaRy < -180)
+                if ((deltaRy > 5 && deltaRy < 180) || deltaRy < -180)
                 {
                     m_TurnInputValue = 0.5f;
-                } else if ((deltaRy < -10 && deltaRy > -180) || deltaRy > 180)
+                } else if ((deltaRy < -5 && deltaRy > -180) || deltaRy > 180)
                 {
                     m_TurnInputValue = -0.5f;
                 } else
