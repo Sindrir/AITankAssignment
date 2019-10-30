@@ -30,11 +30,12 @@ public class Graph : MonoBehaviour
         Nodes = GetComponentsInChildren<GraphNode>(true).ToList();
     }
     
+    /*
     public GraphNode GetNextNode()
     {
         
     }
-    
+    */
 
     // Update is called once per frame
     void Update()
