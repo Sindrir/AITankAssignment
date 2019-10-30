@@ -105,11 +105,15 @@ namespace Complete
                 }
 
                 var distance = Mathf.Sqrt(Mathf.Pow(targetDistance.x, 2) + Mathf.Pow(targetDistance.y, 2));
-                Debug.Log(distance);
                 if (distance < 0.52f)
                 {
-                    m_MovementInputValue = 0;
-                    _targetNode = _targetNode.Adjacent[0];
+                    if (_targetNode.HasAdjacent())
+                    {
+                        _targetNode = _targetNode.Adjacent[0];
+                    } else
+                    {
+                        m_MovementInputValue = 0;
+                    }
                 }
 
                 

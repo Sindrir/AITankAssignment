@@ -18,6 +18,16 @@ public class GraphNode : MonoBehaviour
         
     }
 
+    public bool HasAdjacent()
+    {
+        foreach (var node in Adjacent)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     private void OnDrawGizmos()
     {
         foreach (var node in Adjacent)
