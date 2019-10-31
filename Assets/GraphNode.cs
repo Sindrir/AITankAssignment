@@ -13,11 +13,6 @@ public class GraphNode : MonoBehaviour
     [Range(0, 10)]
     public int ExampleInteger;
 
-    private void Update()
-    {
-        
-    }
-
     public bool HasAdjacent()
     {
         foreach (var node in Adjacent)
@@ -30,9 +25,10 @@ public class GraphNode : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        foreach (var node in Adjacent)
-        {
-            Debug.DrawLine(node.transform.position, transform.position, Color.red);
-        }
+        if (HasAdjacent())
+            foreach (var node in Adjacent)
+            {
+                Debug.DrawLine(node.transform.position, transform.position, Color.red);
+            }
     }
 }
