@@ -29,13 +29,95 @@ public class Graph : MonoBehaviour
     {
         Nodes = GetComponentsInChildren<GraphNode>(true).ToList();
     }
-    
+
     /*
     public GraphNode GetNextNode()
     {
         
     }
     */
+    public GraphNode AStar(GraphNode startNode, GraphNode endNode)
+    {
+
+        List<GraphNode> openSet = new List<GraphNode>();
+        List<GraphNode> cameFrom = new List<GraphNode>();
+        openSet.Add(startNode);
+
+        float[] gScore = new float[100];
+        float[] fScore = new float[100];
+        for (int i = 0; i < 100; i++)
+        {
+            gScore[i] = 1000;
+            fScore[i] = 1000;
+        }
+        gScore[startNode._id] = 0;
+        fScore[startNode._id] = h(startNode, endNode);
+
+        while (openSet.Any())
+        {
+            var lowIndex = 0;
+            for (var i = 0; i < openSet.Count; i++)
+            {
+                if (fScore[i] < fScore[lowIndex])
+                {
+                    lowIndex = i;
+                }
+            }
+            var current = openSet[lowIndex];
+            if (current == endNode)
+            {
+                // TODO Reconstruct the path
+            }
+
+            openSet.Remove(current);
+            foreach (var node in current.Adjacent)
+            {
+                var edge = GetEdge(current, node);
+                var tentativeScore = gScore[current._id] + edge.Weight;
+                if (tentativeScore < gScore[node._id])
+                {
+                    cameFrom[node._id] = current;
+                    gScore[node._id] = tentativeScore;
+                    fScore[node._id] = gScore[node._id] + h(current, node);
+                    if (!openSet.Find(x => x._id == node._id))
+                    {
+                        openSet.Add(node);
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    private List<GraphNode> ReconstructPath(List<GraphNode> cameFrom, GraphNode current)
+    {
+        List<GraphNode> totalPath = new List<GraphNode>();
+        totalPath.Add(current);
+        foreach (var node in cameFrom)
+        {
+            totalPath.Insert(0, node);
+        }
+        return totalPath;
+    }
+
+    private Edge GetEdge(GraphNode start, GraphNode end)
+    {
+        foreach (var _egde in Edges)
+        {
+            if (_egde.StartNode == start && _egde.EndNode == end)
+            {
+                return _egde;
+            }
+        }
+        return null;
+    }
+
+    private float h(GraphNode start, GraphNode end)
+    {
+        var targetDistance = end.gameObject.transform.position - start.transform.position;
+        var distance = Mathf.Sqrt(Mathf.Pow(targetDistance.x, 2) + Mathf.Pow(targetDistance.z, 2));
+        return distance;
+    }
 
     // Update is called once per frame
     void Update()
