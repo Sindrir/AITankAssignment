@@ -104,7 +104,7 @@ namespace Complete
                     m_TurnInputValue = 0;
                 }
 
-                var distance = Mathf.Sqrt(Mathf.Pow(targetDistance.x, 2) + Mathf.Pow(targetDistance.y, 2));
+                var distance = Mathf.Sqrt(Mathf.Pow(targetDistance.x, 2) + Mathf.Pow(targetDistance.z, 2));
                 if (distance < 0.52f)
                 {
                     if (_targetNode.HasAdjacent())
