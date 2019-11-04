@@ -8,7 +8,7 @@ public class GraphNode : MonoBehaviour
     public List<GraphNode> Adjacent;
 
     [SerializeField]
-    private string _id;
+    public int _id;
 
     [Range(0, 10)]
     public int ExampleInteger;
