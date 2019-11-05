@@ -19,12 +19,6 @@ public class Graph : MonoBehaviour
     public List<GraphNode> Nodes;
     public List<Edge> Edges; 
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     private void Reset()
     {
         Nodes = GetComponentsInChildren<GraphNode>(true).ToList();
@@ -50,8 +44,8 @@ public class Graph : MonoBehaviour
             gScore[i] = 1000;
             fScore[i] = 1000;
         }
-        gScore[startNode._id] = 0;
-        fScore[startNode._id] = h(startNode, endNode);
+        gScore[startNode.id] = 0;
+        fScore[startNode.id] = h(startNode, endNode);
 
         while (openSet.Any())
         {
@@ -73,13 +67,13 @@ public class Graph : MonoBehaviour
             foreach (var node in current.Adjacent)
             {
                 var edge = GetEdge(current, node);
-                var tentativeScore = gScore[current._id] + edge.Weight;
-                if (tentativeScore < gScore[node._id])
+                var tentativeScore = gScore[current.id] + edge.Weight;
+                if (tentativeScore < gScore[node.id])
                 {
-                    cameFrom[node._id] = current;
-                    gScore[node._id] = tentativeScore;
-                    fScore[node._id] = gScore[node._id] + h(current, node);
-                    if (!openSet.Find(x => x._id == node._id))
+                    cameFrom[node.id] = current;
+                    gScore[node.id] = tentativeScore;
+                    fScore[node.id] = gScore[node.id] + h(current, node);
+                    if (!openSet.Find(x => x.id == node.id))
                     {
                         openSet.Add(node);
                     }
@@ -117,11 +111,5 @@ public class Graph : MonoBehaviour
         var targetDistance = end.gameObject.transform.position - start.transform.position;
         var distance = Mathf.Sqrt(Mathf.Pow(targetDistance.x, 2) + Mathf.Pow(targetDistance.z, 2));
         return distance;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

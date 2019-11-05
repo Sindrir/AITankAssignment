@@ -8,7 +8,7 @@ public class GraphNode : MonoBehaviour
     public List<GraphNode> Adjacent;
 
     [SerializeField]
-    public int _id;
+    public int id;
 
     [Range(0, 10)]
     public int ExampleInteger;
@@ -31,4 +31,5 @@ public class GraphNode : MonoBehaviour
                 Debug.DrawLine(node.transform.position, transform.position, Color.red);
             }
     }
+
 }
