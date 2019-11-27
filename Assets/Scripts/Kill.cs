@@ -23,8 +23,8 @@ public class Kill : MonoBehaviour
        
       //  thisTanksView = GetComponent<FieldOfView>();
        seesTarget = false;
-       for (int i = 0; i < thisTanksView.visibleTargets.Count; i++){
-           if(thisTanksView.visibleTargets[i].gameObject == enemy ) seesTarget = true;
+       for (int i = 0; i < thisTanksView.shootableTargets.Count; i++){
+           if(thisTanksView.shootableTargets[i].gameObject == enemy ) seesTarget = true;
        }
 
 

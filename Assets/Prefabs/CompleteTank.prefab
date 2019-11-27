@@ -10383,7 +10383,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   viewRadius: 35
-  viewAngle: 360
+  viewAngle: 20
+  shootableTargets: []
   visibleTargets: []
   _viewDelay: 0
   _targetMask:

@@ -7,6 +7,7 @@ public class FieldOfView : MonoBehaviour
     // Public because used by editor
     public float viewRadius;
     [Range(0, 360)] public float viewAngle;
+    public List<Transform> shootableTargets = new List<Transform>();
     public List<Transform> visibleTargets = new List<Transform>();
 
     [SerializeField] private float _viewDelay;              // How long the player must be in view to be seen
@@ -64,25 +65,29 @@ public class FieldOfView : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(_viewDelay);
-            FindVisibleTargets();
+            FindTargets();
         }
     }
 
-    void FindVisibleTargets()
+    void FindTargets()
     {
-        visibleTargets.Clear(); 
+        shootableTargets.Clear();
+        visibleTargets.Clear();
         Collider[] targetsInViewRadius = Physics.OverlapSphere(transform.position, viewRadius, _targetMask);
         for (int i = 0; i < targetsInViewRadius.Length; i++)
         {
             Transform target = targetsInViewRadius[i].transform;
+            if (target == this.gameObject.transform)
+                continue;
             Vector3 dirToTarget = (target.position - transform.position).normalized;
             if (Vector3.Angle(transform.forward, dirToTarget) < viewAngle / 2)
             {
+                visibleTargets.Add(target);
                 float distToTarget = Vector3.Distance(transform.position, target.position);
 
                 if (!Physics.Raycast(transform.position, dirToTarget, distToTarget, _obstacleMask))
                 {
-                    visibleTargets.Add(target);
+                    shootableTargets.Add(target);
                 }
             }
         }
@@ -103,7 +108,7 @@ public class FieldOfView : MonoBehaviour
         Vector3 minPoint = Vector3.zero;
         Vector3 maxPoint = Vector3.zero;
 
-        for(int i = 0; i<_edgeResolveIterations;i++)
+        for (int i = 0; i < _edgeResolveIterations; i++)
         {
             float angle = (minAngle + maxAngle) / 2;
             ViewCastInfo newViewCast = ViewCast(angle);
@@ -122,7 +127,7 @@ public class FieldOfView : MonoBehaviour
             }
 
         }
-            return new EdgeInfo(minPoint, maxPoint);
+        return new EdgeInfo(minPoint, maxPoint);
     }
 
     void DrawFieldOfView()
@@ -136,7 +141,7 @@ public class FieldOfView : MonoBehaviour
             float angle = transform.eulerAngles.y - viewAngle / 2 + stepAngleSize * i;
             ViewCastInfo newViewCast = ViewCast(angle);
 
-            if ( i> 0)
+            if (i > 0)
             {
                 bool edgeDistTresholdExceeded = Mathf.Abs(oldviewCast.distance - newViewCast.distance) > _edgeDistTreshold;
                 if (oldviewCast.hit != newViewCast.hit || (oldviewCast.hit && newViewCast.hit && edgeDistTresholdExceeded))
@@ -157,16 +162,16 @@ public class FieldOfView : MonoBehaviour
         int[] triangles = new int[(vertexCount - 2) * 3];
 
         vertices[0] = Vector3.zero;
-        for(int i = 0;i<vertexCount-1;i++)
+        for (int i = 0; i < vertexCount - 1; i++)
         {
             vertices[i + 1] = transform.InverseTransformPoint(viewPoints[i]);
 
-            if(i < vertexCount-2)
+            if (i < vertexCount - 2)
             {
 
-            triangles[i * 3] = 0;
-            triangles[i * 3 + 1] = i + 1;
-            triangles[i * 3 + 2] = i + 2;
+                triangles[i * 3] = 0;
+                triangles[i * 3 + 1] = i + 1;
+                triangles[i * 3 + 2] = i + 2;
             }
         }
         _fowMesh.Clear();
@@ -180,12 +185,13 @@ public class FieldOfView : MonoBehaviour
     {
         Vector3 dir = DirFromAngle(globalAngle, true);
         RaycastHit hit;
-        if(Physics.Raycast(transform.position, dir, out hit, viewRadius, _obstacleMask))
+        if (Physics.Raycast(transform.position, dir, out hit, viewRadius, _obstacleMask))
         {
             return new ViewCastInfo(true, hit.point, hit.distance, globalAngle);
-        } else
+        }
+        else
         {
-            return new ViewCastInfo(false, transform.position + dir*viewRadius, viewRadius,globalAngle);
+            return new ViewCastInfo(false, transform.position + dir * viewRadius, viewRadius, globalAngle);
 
         }
     }
