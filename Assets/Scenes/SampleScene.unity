@@ -1226,7 +1226,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _graph: {fileID: 1097353538}
   _timesliceInterval: 10
-  _currentFrame: 5
+  _currentFrame: 4
 --- !u!114 &1097353538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1476,6 +1476,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cdc81d8002e54243899f42c6604f90b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1251912589 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 173472, guid: 756d3a6506f2f8241b4e8badde68567a,
+    type: 3}
+  m_PrefabInstance: {fileID: 979194061}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1251912598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1251912589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb19894d9fe755245b1e3b322d5e7ba3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seesTarget: 0
+  enemy: {fileID: 1946467122}
+  targets: []
 --- !u!114 &1264399511 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1430154210085747783, guid: 254852bbf20f4e346a4d91d2af939cf3,
@@ -2114,6 +2135,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 1386111025415171212, guid: d065a5da44bd9db46a7119bae6805057,
+        type: 3}
+      propertyPath: m_Text
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1386111025415171212, guid: d065a5da44bd9db46a7119bae6805057,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 27
+      objectReference: {fileID: 0}
+    - target: {fileID: 1386111025415171212, guid: d065a5da44bd9db46a7119bae6805057,
+        type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1386111025519944327, guid: d065a5da44bd9db46a7119bae6805057,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2244,23 +2280,29 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 260
       objectReference: {fileID: 0}
-    - target: {fileID: 1386111025415171212, guid: d065a5da44bd9db46a7119bae6805057,
-        type: 3}
-      propertyPath: m_Text
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1386111025415171212, guid: d065a5da44bd9db46a7119bae6805057,
-        type: 3}
-      propertyPath: m_FontData.m_FontSize
-      value: 27
-      objectReference: {fileID: 0}
-    - target: {fileID: 1386111025415171212, guid: d065a5da44bd9db46a7119bae6805057,
-        type: 3}
-      propertyPath: m_FontData.m_MinSize
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d065a5da44bd9db46a7119bae6805057, type: 3}
+--- !u!1 &1946467122 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 173472, guid: 756d3a6506f2f8241b4e8badde68567a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1641399200}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1946467132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1946467122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb19894d9fe755245b1e3b322d5e7ba3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seesTarget: 0
+  enemy: {fileID: 1251912589}
+  targets: []
 --- !u!1 &1968711349
 GameObject:
   m_ObjectHideFlags: 0
