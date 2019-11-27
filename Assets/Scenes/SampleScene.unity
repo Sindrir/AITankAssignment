@@ -1150,6 +1150,14 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 11488788, guid: 756d3a6506f2f8241b4e8badde68567a, type: 3}
+      propertyPath: m_PlayerNumber
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11488788, guid: 756d3a6506f2f8241b4e8badde68567a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 756d3a6506f2f8241b4e8badde68567a, type: 3}
 --- !u!4 &979194062 stripped
@@ -1226,7 +1234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _graph: {fileID: 1097353538}
   _timesliceInterval: 10
-  _currentFrame: 4
+  _currentFrame: 5
 --- !u!114 &1097353538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1482,6 +1490,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 979194061}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &1251912595 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 8261418, guid: 756d3a6506f2f8241b4e8badde68567a,
+    type: 3}
+  m_PrefabInstance: {fileID: 979194061}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1251912598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1496,7 +1510,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   seesTarget: 0
   enemy: {fileID: 1946467122}
-  targets: []
+--- !u!114 &1251912599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1251912589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 512839ba1ef752c4cb2663d028d8a3fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PlayerNumber: 2
+  m_Shell: {fileID: 5409530, guid: 008ecb1b70bec724fa2cd34255b0d8f8, type: 3}
+  m_FireTransform: {fileID: 1364692090}
+  m_AimSlider: {fileID: 1363587258}
+  m_ShootingAudio: {fileID: 1251912595}
+  m_ChargingClip: {fileID: 8300000, guid: c17f124fcdc0f5446a72f793898bd74b, type: 3}
+  m_FireClip: {fileID: 8300000, guid: 672a9941361ad494a99fba36759eca80, type: 3}
+  m_MinLaunchForce: 15
+  m_MaxLaunchForce: 30
+  m_MaxChargeTime: 0.75
+  threshhold: 30
+  holdDown: 0
+  released: 0
+  m_CurrentLaunchForce: 0
 --- !u!114 &1264399511 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1430154210085747783, guid: 254852bbf20f4e346a4d91d2af939cf3,
@@ -1657,6 +1696,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cdc81d8002e54243899f42c6604f90b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1363587258 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 11407922, guid: 756d3a6506f2f8241b4e8badde68567a,
+    type: 3}
+  m_PrefabInstance: {fileID: 979194061}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -113659843, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1364692090 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 435794, guid: 756d3a6506f2f8241b4e8badde68567a,
+    type: 3}
+  m_PrefabInstance: {fileID: 979194061}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1419952167 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1386111025415171212, guid: d065a5da44bd9db46a7119bae6805057,
@@ -1755,6 +1812,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cdc81d8002e54243899f42c6604f90b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &1571718050 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 435794, guid: 756d3a6506f2f8241b4e8badde68567a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1641399200}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1624723361
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1915,8 +1978,25 @@ PrefabInstance:
       propertyPath: _graph
       value: 
       objectReference: {fileID: 1097353538}
-    m_RemovedComponents: []
+    - target: {fileID: 11488788, guid: 756d3a6506f2f8241b4e8badde68567a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 11488788, guid: 756d3a6506f2f8241b4e8badde68567a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 756d3a6506f2f8241b4e8badde68567a, type: 3}
+--- !u!114 &1699103734 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 11407922, guid: 756d3a6506f2f8241b4e8badde68567a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1641399200}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -113659843, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1718525105 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6866587858257266707, guid: 254852bbf20f4e346a4d91d2af939cf3,
@@ -2288,6 +2368,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1641399200}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &1946467128 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 8261418, guid: 756d3a6506f2f8241b4e8badde68567a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1641399200}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1946467132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2302,7 +2388,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   seesTarget: 0
   enemy: {fileID: 1251912589}
-  targets: []
+--- !u!114 &1946467133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1946467122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 512839ba1ef752c4cb2663d028d8a3fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PlayerNumber: 1
+  m_Shell: {fileID: 5409530, guid: 008ecb1b70bec724fa2cd34255b0d8f8, type: 3}
+  m_FireTransform: {fileID: 1571718050}
+  m_AimSlider: {fileID: 1699103734}
+  m_ShootingAudio: {fileID: 1946467128}
+  m_ChargingClip: {fileID: 8300000, guid: c17f124fcdc0f5446a72f793898bd74b, type: 3}
+  m_FireClip: {fileID: 8300000, guid: 672a9941361ad494a99fba36759eca80, type: 3}
+  m_MinLaunchForce: 15
+  m_MaxLaunchForce: 30
+  m_MaxChargeTime: 0.75
+  threshhold: 20
+  holdDown: 0
+  released: 0
+  m_CurrentLaunchForce: 0
 --- !u!1 &1968711349
 GameObject:
   m_ObjectHideFlags: 0

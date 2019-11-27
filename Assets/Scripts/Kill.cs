@@ -8,10 +8,12 @@ public class Kill : MonoBehaviour
     [SerializeField] public bool seesTarget;
     [SerializeField] public GameObject enemy;
     private  FieldOfView thisTanksView;
+    private AIFire fireScript;
     void Start()
     {
         seesTarget = false;
         thisTanksView = GetComponent<FieldOfView>();
+        fireScript = GetComponent<AIFire>();
     }    
 
     // Update is called once per frame
@@ -24,6 +26,12 @@ public class Kill : MonoBehaviour
        for (int i = 0; i < thisTanksView.visibleTargets.Count; i++){
            if(thisTanksView.visibleTargets[i].gameObject == enemy ) seesTarget = true;
        }
+
+
+       if (seesTarget){
+       /*USE AIFire script*/
+            fireScript.holdDown = true;
+       }else fireScript.holdDown = false;
         
     }
 }
