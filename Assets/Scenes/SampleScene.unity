@@ -1234,7 +1234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _graph: {fileID: 1097353538}
   _timesliceInterval: 10
-  _currentFrame: 4
+  _currentFrame: 1
 --- !u!114 &1097353538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1508,8 +1508,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb19894d9fe755245b1e3b322d5e7ba3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seesTarget: 0
+  canShootTarget: 0
+  canSeeTarget: 0
   enemy: {fileID: 1946467122}
+  lastSeen: {fileID: 0}
 --- !u!114 &1251912599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1998,6 +2000,11 @@ PrefabInstance:
       propertyPath: InitialModule.startSizeZ.minMaxState
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 612862927363565858, guid: 756d3a6506f2f8241b4e8badde68567a,
+        type: 3}
+      propertyPath: viewAngle
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11488788, guid: 756d3a6506f2f8241b4e8badde68567a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 756d3a6506f2f8241b4e8badde68567a, type: 3}
@@ -2402,8 +2409,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb19894d9fe755245b1e3b322d5e7ba3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seesTarget: 0
+  canShootTarget: 0
+  canSeeTarget: 0
   enemy: {fileID: 1251912589}
+  lastSeen: {fileID: 0}
 --- !u!114 &1946467133
 MonoBehaviour:
   m_ObjectHideFlags: 0

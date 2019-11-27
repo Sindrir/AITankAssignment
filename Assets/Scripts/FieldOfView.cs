@@ -71,26 +71,38 @@ public class FieldOfView : MonoBehaviour
 
     void FindTargets()
     {
-        shootableTargets.Clear();
-        visibleTargets.Clear();
+        // Clear out the old lists
+        clearLists(); 
+
+        // Find all targets in a big circle around the object
         Collider[] targetsInViewRadius = Physics.OverlapSphere(transform.position, viewRadius, _targetMask);
+        // For each target
         for (int i = 0; i < targetsInViewRadius.Length; i++)
         {
             Transform target = targetsInViewRadius[i].transform;
+            // Skip iteration if the target is the object
             if (target == this.gameObject.transform)
                 continue;
-            Vector3 dirToTarget = (target.position - transform.position).normalized;
-            if (Vector3.Angle(transform.forward, dirToTarget) < viewAngle / 2)
-            {
-                visibleTargets.Add(target);
-                float distToTarget = Vector3.Distance(transform.position, target.position);
 
+            // Calculate direction and distance to target
+            Vector3 dirToTarget = (target.position - transform.position).normalized;
+            float distToTarget = Vector3.Distance(transform.position, target.position);
+
+            // Checks the entire circle if there's any visible targets within
+            if (!Physics.Raycast(transform.position, dirToTarget, distToTarget, _obstacleMask))
+                visibleTargets.Add(target);
+
+            // Limits the check to the view angle (field of view) of the object to see if there's a target within
+            if (Vector3.Angle(transform.forward, dirToTarget) < viewAngle / 2)
                 if (!Physics.Raycast(transform.position, dirToTarget, distToTarget, _obstacleMask))
-                {
                     shootableTargets.Add(target);
-                }
-            }
         }
+    }
+
+    void clearLists()
+    {
+        shootableTargets.Clear();
+        visibleTargets.Clear();
     }
 
     public Vector3 DirFromAngle(float angleInDegrees, bool angleIsGlobal)

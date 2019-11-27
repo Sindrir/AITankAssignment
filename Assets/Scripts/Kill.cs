@@ -26,29 +26,22 @@ public class Kill : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      
-       
-      //  thisTanksView = GetComponent<FieldOfView>();
        canShootTarget = false;
-       for (int i = 0; i < thisTanksView.shootableTargets.Count; i++){
-           if(thisTanksView.shootableTargets[i].gameObject == enemy ) canShootTarget = true;
-       }
+       for (int i = 0; i < thisTanksView.shootableTargets.Count; i++)
+           if(thisTanksView.shootableTargets[i].gameObject == enemy )
+                canShootTarget = true;
 
        canSeeTarget = false;
-       for (int i = 0; i < thisTanksView.visibleTargets.Count; i++){
-           if(thisTanksView.visibleTargets[i].gameObject == enemy ) canSeeTarget = true;
-       }
-
-
-       if (canShootTarget){
-       /*USE AIFire script*/
+       for (int i = 0; i < thisTanksView.visibleTargets.Count; i++)
+           if(thisTanksView.visibleTargets[i].gameObject == enemy )
+                canSeeTarget = true;
+       
+       if (canShootTarget)              //USE AIFire script
             fireScript.holdDown = true;
-       }else fireScript.holdDown = false;
+        else
+            fireScript.holdDown = false;
 
-       if(canSeeTarget){
-           // Use the enemy's TankMovement Script to get last visited node
-           lastSeen = enemyMovementScript.LastNode2();
-       }
-        
+       if(canSeeTarget) // Use the enemy's TankMovement Script to get last visited node
+            lastSeen = enemyMovementScript.LastNode2();
     }
 }
