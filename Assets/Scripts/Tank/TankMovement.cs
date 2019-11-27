@@ -233,6 +233,17 @@ namespace Complete
             return lastVisited;
         }
 
+        public GraphNode LastNode2() 
+        {
+            int bt = 0;
+            GraphNode lastVisited = null; 
+
+            // Find the last visited adjacent node
+            while (!IsAdjacent(lastVisited))
+                lastVisited = _visitedNodes[_visitedNodes.Count - ++bt];
+            return lastVisited;
+        }
+
         private void AddVisited(GraphNode node)             // Make sure the node hasn't already been added, and then add it
         {
             for (int i = 0; i < _visitedNodes.Count; i++)

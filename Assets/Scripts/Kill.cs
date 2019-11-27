@@ -5,15 +5,22 @@ using UnityEngine;
 public class Kill : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] public bool seesTarget;
+    [SerializeField] public bool canShootTarget;
+    [SerializeField] public bool canSeeTarget;
     [SerializeField] public GameObject enemy;
+    public GraphNode lastSeen;
+
+    private Complete.TankMovement enemyMovementScript;
     private  FieldOfView thisTanksView;
     private AIFire fireScript;
     void Start()
     {
-        seesTarget = false;
+        lastSeen = null;
+        canShootTarget = false;
+        canSeeTarget = false;
         thisTanksView = GetComponent<FieldOfView>();
         fireScript = GetComponent<AIFire>();
+        enemyMovementScript = enemy.GetComponent<Complete.TankMovement>();
     }    
 
     // Update is called once per frame
@@ -22,16 +29,26 @@ public class Kill : MonoBehaviour
       
        
       //  thisTanksView = GetComponent<FieldOfView>();
-       seesTarget = false;
+       canShootTarget = false;
        for (int i = 0; i < thisTanksView.shootableTargets.Count; i++){
-           if(thisTanksView.shootableTargets[i].gameObject == enemy ) seesTarget = true;
+           if(thisTanksView.shootableTargets[i].gameObject == enemy ) canShootTarget = true;
+       }
+
+       canSeeTarget = false;
+       for (int i = 0; i < thisTanksView.visibleTargets.Count; i++){
+           if(thisTanksView.visibleTargets[i].gameObject == enemy ) canSeeTarget = true;
        }
 
 
-       if (seesTarget){
+       if (canShootTarget){
        /*USE AIFire script*/
             fireScript.holdDown = true;
        }else fireScript.holdDown = false;
+
+       if(canSeeTarget){
+           // Use the enemy's TankMovement Script to get last visited node
+           lastSeen = enemyMovementScript.LastNode2();
+       }
         
     }
 }
