@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -784,8 +784,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 815352581}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 3, z: 1}
   m_Children:
   - {fileID: 1968711350}
   - {fileID: 1296541813}
@@ -1234,7 +1234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _graph: {fileID: 1097353538}
   _timesliceInterval: 10
-  _currentFrame: 5
+  _currentFrame: 4
 --- !u!114 &1097353538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1981,6 +1981,22 @@ PrefabInstance:
     - target: {fileID: 11488788, guid: 756d3a6506f2f8241b4e8badde68567a, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19809832, guid: 756d3a6506f2f8241b4e8badde68567a, type: 3}
+      propertyPath: InitialModule.startSizeY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19809832, guid: 756d3a6506f2f8241b4e8badde68567a, type: 3}
+      propertyPath: InitialModule.startSizeZ.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19821292, guid: 756d3a6506f2f8241b4e8badde68567a, type: 3}
+      propertyPath: InitialModule.startSizeY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19821292, guid: 756d3a6506f2f8241b4e8badde68567a, type: 3}
+      propertyPath: InitialModule.startSizeZ.minMaxState
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11488788, guid: 756d3a6506f2f8241b4e8badde68567a, type: 3}
