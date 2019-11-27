@@ -215,12 +215,21 @@ namespace Complete
             return false;
         }
 
-        private GraphNode UnvisitedAdjacent(GraphNode target)
+       /* private GraphNode UnvisitedAdjacent(GraphNode target)
         {
             for (int i = 0; i < target.Adjacent.Count; i++)
                 if (!HasBeenVisited(target.Adjacent[i]))
                     return target.Adjacent[i];
             return null;
+        }*/
+
+        private List<GraphNode> UnvisitedAdjacents(GraphNode target)
+        {
+            List<GraphNode> graph = new List<GraphNode>();
+            for (int i = 0; i < target.Adjacent.Count; i++)
+                if (!HasBeenVisited(target.Adjacent[i]))
+                    graph.Add(target.Adjacent[i]);
+            return graph;
         }
 
         private GraphNode LastNode() 
@@ -248,11 +257,11 @@ namespace Complete
                 _visitedNodes.Clear();
             }
 
-            GraphNode node = UnvisitedAdjacent(_targetNode); // Finds the first unvisited adjacent
-            if (node)                                        // If there are any unvisited adjacents  
+            List<GraphNode> nodes = UnvisitedAdjacents(_targetNode);     // Finds all unvisited adjacents
+            if (nodes.Count != 0)                                        // If there are any unvisited adjacents  
             {
-                backtrack = 0;                               // Reset the backtracking
-                return node;
+                backtrack = 0;                                           // Reset the backtracking
+                return nodes[UnityEngine.Random.Range(0, nodes.Count)];  // Return a random unvisited adjacent
             }
             else
                 return LastNode();
