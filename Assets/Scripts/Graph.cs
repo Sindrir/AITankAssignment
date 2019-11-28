@@ -30,7 +30,7 @@ public class Graph : MonoBehaviour
         
     }
     */
-    public GraphNode AStar(GraphNode startNode, GraphNode endNode)
+    public List<GraphNode> AStar(GraphNode startNode, GraphNode endNode)
     {
 
         List<GraphNode> openSet = new List<GraphNode>();
@@ -61,6 +61,7 @@ public class Graph : MonoBehaviour
             if (current == endNode)
             {
                 // TODO Reconstruct the path
+                Debug.Log("The A* path");
             }
 
             openSet.Remove(current);
