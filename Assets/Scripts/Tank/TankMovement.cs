@@ -248,7 +248,7 @@ namespace Complete
             GraphNode lastVisited = null; 
 
             // Find the last visited adjacent node
-            while (!IsAdjacent(lastVisited))
+            while (!IsAdjacent(lastVisited) && (_visitedNodes.Count>0))
                 lastVisited = _visitedNodes[_visitedNodes.Count - ++bt];
             return lastVisited;
         }

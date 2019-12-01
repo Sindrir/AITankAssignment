@@ -74,7 +74,7 @@ public class Graph : MonoBehaviour
                 foreach (var l in path)
                     Debug.Log(l.id);
                 Debug.Log("The A* path");
-                break;
+                return path;
             }
             
             openSet.Remove(current);

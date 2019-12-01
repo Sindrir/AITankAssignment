@@ -9,8 +9,10 @@ public class Kill : MonoBehaviour
     [SerializeField] public bool canSeeTarget;
     [SerializeField] public GameObject enemy;
     public GraphNode lastSeen;
+    public GraphNode currentNode;
 
     private Complete.TankMovement enemyMovementScript;
+    private Complete.TankMovement myMovementScript;
     private  FieldOfView thisTanksView;
     private AIFire fireScript;
     void Start()
@@ -21,11 +23,13 @@ public class Kill : MonoBehaviour
         thisTanksView = GetComponent<FieldOfView>();
         fireScript = GetComponent<AIFire>();
         enemyMovementScript = enemy.GetComponent<Complete.TankMovement>();
+        myMovementScript = GetComponent<Complete.TankMovement>();
     }    
 
     // Update is called once per frame
     void Update()
     {
+        currentNode = myMovementScript.LastNode2();
        canShootTarget = false;
        for (int i = 0; i < thisTanksView.shootableTargets.Count; i++)
            if(thisTanksView.shootableTargets[i].gameObject == enemy )

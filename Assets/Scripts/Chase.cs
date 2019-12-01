@@ -4,21 +4,30 @@ using UnityEngine;
 
 public class Chase : MonoBehaviour
 {
-    [SerializeField] GraphNode start;
-    [SerializeField] GraphNode end;
+    public GraphNode current;
+    public GraphNode enemyNode;
+
+    public List<GraphNode> path;
     private Graph  graphScript;
+    private Kill killScript;
     // Start is called before the first frame update
     void Start()
     {
-        graphScript = GameObject.Find("Graph").GetComponent<Graph>();
-        // A* ---> index out of range   
-        graphScript.AStar(start, end);
+        path = new List<GraphNode>();
+        graphScript = GameObject.Find("Graph").GetComponent<Graph>();  
         
+        killScript = GetComponent<Kill>();
+        enemyNode = killScript.lastSeen;
+        current = killScript.currentNode;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        enemyNode = killScript.lastSeen;
+        current = killScript.currentNode;
+        if(enemyNode && current && killScript.canSeeTarget)
+            path = graphScript.AStar(current, enemyNode);
+       
     }
 }
