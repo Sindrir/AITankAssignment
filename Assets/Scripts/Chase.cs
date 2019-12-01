@@ -11,7 +11,8 @@ public class Chase : MonoBehaviour
     void Start()
     {
         graphScript = GameObject.Find("Graph").GetComponent<Graph>();
-     // A* ---> index out of range   graphScript.AStar(start, end);
+        // A* ---> index out of range   
+        graphScript.AStar(start, end);
         
     }
 

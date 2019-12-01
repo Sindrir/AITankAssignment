@@ -13,6 +13,11 @@ public class GraphNode : MonoBehaviour
     [Range(0, 10)]
     public int ExampleInteger;
 
+    public int gCost;
+    public int hCost;
+    public GraphNode parent;
+    
+
     public bool HasAdjacent()
     {
         foreach (var node in Adjacent)

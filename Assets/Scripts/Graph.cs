@@ -35,8 +35,11 @@ public class Graph : MonoBehaviour
 
         List<GraphNode> openSet = new List<GraphNode>();
         List<GraphNode> cameFrom = new List<GraphNode>();
+        List<GraphNode> closedSet = new List<GraphNode>();
         openSet.Add(startNode);
-
+        List<GraphNode> testCameFrom = new List<GraphNode>();
+        for (int i = 0; i < 200; i++) testCameFrom.Add(null);
+        //Debug.Log(testCameFrom.Count);
         float[] gScore = new float[100];
         float[] fScore = new float[100];
         for (int i = 0; i < 100; i++)
@@ -46,7 +49,9 @@ public class Graph : MonoBehaviour
         }
         gScore[startNode.id] = 0;
         fScore[startNode.id] = h(startNode, endNode);
+        //cameFrom.Add(startNode);
 
+        var counter = 0;
         while (openSet.Any())
         {
             var lowIndex = 0;
@@ -58,40 +63,77 @@ public class Graph : MonoBehaviour
                 }
             }
             var current = openSet[lowIndex];
+            //Debug.Log("Current: " + current.id);
             if (current == endNode)
             {
                 // TODO Reconstruct the path
+               // Debug.Log("winning current " + current.id);
+               var path = ReconstructPath(startNode, endNode);
+                //Debug.Log(path.Count);
+                Debug.Log("Path:");
+                foreach (var l in path)
+                    Debug.Log(l.id);
                 Debug.Log("The A* path");
+                break;
             }
-
+            
             openSet.Remove(current);
+            //cameFrom.Add(current);
+            if(!closedSet.Contains(current))
+                closedSet.Add(current);
             foreach (var node in current.Adjacent)
             {
+                if (closedSet.Contains(node))
+                {
+                    continue;
+                }
+
                 var edge = GetEdge(current, node);
                 var tentativeScore = gScore[current.id] + edge.Weight;
-                if (tentativeScore < gScore[node.id])
+                if(tentativeScore < gScore[node.id] || openSet.Contains(node))
                 {
-                    cameFrom[node.id] = current;
+                    openSet.Remove(node);
+                    //if (!cameFrom.Contains(current))
+                    //    cameFrom.Add(current);
+                    //else cameFrom[counter] = current;
+
+                    //cameFrom[counter] = current;
                     gScore[node.id] = tentativeScore;
-                    fScore[node.id] = gScore[node.id] + h(current, node);
+                    fScore[node.id] = gScore[node.id] + h(node, endNode);
+                    node.parent = current;
+
                     if (!openSet.Find(x => x.id == node.id))
                     {
                         openSet.Add(node);
                     }
                 }
+
             }
+
+            //debugger(closedSet, "closedSet ");
+            counter++;
         }
         return null;
     }
 
-    private List<GraphNode> ReconstructPath(List<GraphNode> cameFrom, GraphNode current)
+    private List<GraphNode> ReconstructPath(GraphNode start, GraphNode end)
     {
         List<GraphNode> totalPath = new List<GraphNode>();
-        totalPath.Add(current);
-        foreach (var node in cameFrom)
+        //foreach (var node in cameFrom)
+        //{
+        //    totalPath.Add(node);
+        //totalPath.Insert(0, node);
+        //}
+        //totalPath.Add(current);
+
+        GraphNode currentNode = end;
+
+        while (currentNode != start)
         {
-            totalPath.Insert(0, node);
+            totalPath.Add(currentNode);
+            currentNode = currentNode.parent;
         }
+        totalPath.Reverse();
         return totalPath;
     }
 
@@ -112,5 +154,10 @@ public class Graph : MonoBehaviour
         var targetDistance = end.gameObject.transform.position - start.transform.position;
         var distance = Mathf.Sqrt(Mathf.Pow(targetDistance.x, 2) + Mathf.Pow(targetDistance.z, 2));
         return distance;
+    }
+
+    private void debugger(List<GraphNode> l, string txt)
+    {
+        foreach (var n in l) Debug.Log(txt + n.id);
     }
 }
