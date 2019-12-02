@@ -95,7 +95,7 @@ public class TankChase : MonoBehaviour
         //m_TurnInputValue = Input.GetAxis (m_TurnAxisName);
         if(chase.pathChanged){
             path = new List<GraphNode>();
-            path.AddRange(chase.path);
+            if(chase.path != null)path.AddRange(chase.path);
         }
 
         m_MovementInputValue = 1;
