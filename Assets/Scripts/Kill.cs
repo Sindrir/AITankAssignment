@@ -13,6 +13,7 @@ public class Kill : MonoBehaviour
 
     private Complete.TankMovement enemyMovementScript;
     private Complete.TankMovement myMovementScript;
+    private Kill enemyKillScript;
     private  FieldOfView thisTanksView;
     private AIFire fireScript;
     void Start()
@@ -23,13 +24,14 @@ public class Kill : MonoBehaviour
         thisTanksView = GetComponent<FieldOfView>();
         fireScript = GetComponent<AIFire>();
         enemyMovementScript = enemy.GetComponent<Complete.TankMovement>();
+        enemyKillScript = enemy.GetComponent<Kill>();
         myMovementScript = GetComponent<Complete.TankMovement>();
     }    
 
     // Update is called once per frame
     void Update()
     {
-        currentNode = myMovementScript.LastNode2();
+        if(myMovementScript.enabled)currentNode = myMovementScript.LastNode2();
        canShootTarget = false;
        for (int i = 0; i < thisTanksView.shootableTargets.Count; i++)
            if(thisTanksView.shootableTargets[i].gameObject == enemy )
@@ -46,6 +48,10 @@ public class Kill : MonoBehaviour
             fireScript.holdDown = false;
 
        if(canSeeTarget) // Use the enemy's TankMovement Script to get last visited node
+            lastSeen = enemyKillScript.currentNode;
+       /*
             lastSeen = enemyMovementScript.LastNode2();
+            if(enemyChaseScript.enabled) lastSeen = enemyChaseScript.currentNode;
+            */
     }
 }

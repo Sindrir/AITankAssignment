@@ -70,10 +70,10 @@ public class Graph : MonoBehaviour
                // Debug.Log("winning current " + current.id);
                var path = ReconstructPath(startNode, endNode);
                 //Debug.Log(path.Count);
-                Debug.Log("Path:");
+               // Debug.Log("Path:");
                 foreach (var l in path)
-                    Debug.Log(l.id);
-                Debug.Log("The A* path");
+                 //   Debug.Log(l.id);
+               // Debug.Log("The A* path");
                 return path;
             }
             

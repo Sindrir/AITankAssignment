@@ -1234,7 +1234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _graph: {fileID: 1097353538}
   _timesliceInterval: 10
-  _currentFrame: 9
+  _currentFrame: 5
 --- !u!114 &1097353538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1539,6 +1539,45 @@ MonoBehaviour:
   holdDown: 0
   released: 0
   m_CurrentLaunchForce: 0
+--- !u!114 &1251912600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1251912589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecc6cc50d824e0947bd1e42ded693ef9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  current: {fileID: 0}
+  enemyNode: {fileID: 0}
+  path: []
+  oldPath: []
+  pathChanged: 0
+--- !u!114 &1251912601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1251912589}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed6cec6699f94bd4aa4021537b582dd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PlayerNumber: 2
+  m_Speed: 2
+  m_TurnSpeed: 180
+  m_MovementAudio: {fileID: 1251912595}
+  m_EngineIdling: {fileID: 8300000, guid: 4932ab25b84dd7649b80af68a9660ddc, type: 3}
+  m_EngineDriving: {fileID: 8300000, guid: d7ca9fb5aa30155449192b23d7fb3336, type: 3}
+  m_PitchRange: 0.1
+  _targetNode: {fileID: 0}
+  _graph: {fileID: 0}
+  path: []
 --- !u!114 &1264399511 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1430154210085747783, guid: 254852bbf20f4e346a4d91d2af939cf3,
@@ -2413,6 +2452,8 @@ MonoBehaviour:
   current: {fileID: 0}
   enemyNode: {fileID: 0}
   path: []
+  oldPath: []
+  pathChanged: 0
 --- !u!114 &1946467132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2456,6 +2497,28 @@ MonoBehaviour:
   holdDown: 0
   released: 0
   m_CurrentLaunchForce: 0
+--- !u!114 &1946467134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1946467122}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed6cec6699f94bd4aa4021537b582dd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PlayerNumber: 1
+  m_Speed: 2
+  m_TurnSpeed: 180
+  m_MovementAudio: {fileID: 1946467128}
+  m_EngineIdling: {fileID: 8300000, guid: 4932ab25b84dd7649b80af68a9660ddc, type: 3}
+  m_EngineDriving: {fileID: 8300000, guid: d7ca9fb5aa30155449192b23d7fb3336, type: 3}
+  m_PitchRange: 0.1
+  _targetNode: {fileID: 0}
+  _graph: {fileID: 0}
+  path: []
 --- !u!1 &1968711349
 GameObject:
   m_ObjectHideFlags: 0
