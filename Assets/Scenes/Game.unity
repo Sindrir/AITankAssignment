@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1234,7 +1234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _graph: {fileID: 1097353538}
   _timesliceInterval: 10
-  _currentFrame: 5
+  _currentFrame: 9
 --- !u!114 &1097353538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1512,6 +1512,7 @@ MonoBehaviour:
   canSeeTarget: 0
   enemy: {fileID: 1946467122}
   lastSeen: {fileID: 0}
+  currentNode: {fileID: 0}
 --- !u!114 &1251912599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1534,7 +1535,7 @@ MonoBehaviour:
   m_MinLaunchForce: 15
   m_MaxLaunchForce: 30
   m_MaxChargeTime: 0.75
-  threshhold: 30
+  threshhold: 17
   holdDown: 0
   released: 0
   m_CurrentLaunchForce: 0
@@ -2409,8 +2410,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecc6cc50d824e0947bd1e42ded693ef9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  start: {fileID: 1343969813}
-  end: {fileID: 1216267203}
+  current: {fileID: 0}
+  enemyNode: {fileID: 0}
+  path: []
 --- !u!114 &1946467132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2427,6 +2429,7 @@ MonoBehaviour:
   canSeeTarget: 0
   enemy: {fileID: 1251912589}
   lastSeen: {fileID: 0}
+  currentNode: {fileID: 0}
 --- !u!114 &1946467133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2449,7 +2452,7 @@ MonoBehaviour:
   m_MinLaunchForce: 15
   m_MaxLaunchForce: 30
   m_MaxChargeTime: 0.75
-  threshhold: 20
+  threshhold: 17
   holdDown: 0
   released: 0
   m_CurrentLaunchForce: 0
