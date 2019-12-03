@@ -24,22 +24,18 @@ public class Graph : MonoBehaviour
         Nodes = GetComponentsInChildren<GraphNode>(true).ToList();
     }
 
-    /*
-    public GraphNode GetNextNode()
-    {
-        
-    }
-    */
     public List<GraphNode> AStar(GraphNode startNode, GraphNode endNode)
     {
+        GraphNode[] cameFrom = new GraphNode[100];
 
         List<GraphNode> openSet = new List<GraphNode>();
-        GraphNode[] cameFrom = new GraphNode[100];
         List<GraphNode> closedSet = new List<GraphNode>();
-        openSet.Add(startNode);
         List<GraphNode> testCameFrom = new List<GraphNode>();
+
+        openSet.Add(startNode);
+
         for (int i = 0; i < 200; i++) testCameFrom.Add(null);
-        //Debug.Log(testCameFrom.Count);
+
         float[] gScore = new float[100];
         float[] fScore = new float[100];
         for (int i = 0; i < 100; i++)
@@ -47,11 +43,10 @@ public class Graph : MonoBehaviour
             gScore[i] = 1000000;
             fScore[i] = 1000000;
         }
+
         gScore[startNode.id] = 0;
         fScore[startNode.id] = h(startNode, endNode);
-        //cameFrom.Add(startNode);
 
-        var counter = 0;
         while (openSet.Any())
         {
             var lowIndex = 0;
@@ -63,24 +58,17 @@ public class Graph : MonoBehaviour
                 }
             }
             var current = openSet[lowIndex];
-            //Debug.Log("Current: " + current.id);
             if (current == endNode)
             {
-                // TODO Reconstruct the path
-               // Debug.Log("winning current " + current.id);
                var path = ReconstructPath(cameFrom, current);
-                //Debug.Log(path.Count);
-               // Debug.Log("Path:");
-                //foreach (var l in path)
-                 //   Debug.Log(l.id);
-               // Debug.Log("The A* path");
-                return path;
+               return path;
             }
             
             openSet.Remove(current);
-            //cameFrom.Add(current);
+
             if(!closedSet.Contains(current))
                 closedSet.Add(current);
+
             foreach (var node in current.Adjacent)
             {
                 if (closedSet.Contains(node))
@@ -90,13 +78,9 @@ public class Graph : MonoBehaviour
 
                 var edge = GetEdge(current, node);
                 var tentativeScore = gScore[current.id] + edge.Weight;
+
                 if(tentativeScore < gScore[node.id])
                 {
-                    //if (!cameFrom.Contains(current))
-                    //    cameFrom.Add(current);
-                    //else cameFrom[counter] = current;
-
-                    //cameFrom[counter] = current;
                     cameFrom[node.id] = current;
                     gScore[node.id] = tentativeScore;
                     fScore[node.id] = gScore[node.id] + h(node, endNode);
@@ -107,11 +91,7 @@ public class Graph : MonoBehaviour
                         openSet.Add(node);
                     }
                 }
-
             }
-
-            //debugger(closedSet, "closedSet ");
-            counter++;
         }
         return null;
     }
@@ -121,29 +101,13 @@ public class Graph : MonoBehaviour
         List<GraphNode> totalPath = new List<GraphNode>();
         totalPath.Add(current);
 
-        while (current)
+        while (cameFrom[current.id])
         {
             current = cameFrom[current.id];
             totalPath.Insert(0, current);
         }
+        totalPath.RemoveAt(0); // To remove the first element in the list, is not needed for the tanks.
 
-
-        //foreach (var node in cameFrom)
-        //{
-        //    totalPath.Add(node);
-        //totalPath.Insert(0, node);
-        //}
-        //totalPath.Add(current);
-        /*
-        GraphNode currentNode = end;
-
-        while (currentNode != start)
-        {
-            totalPath.Add(currentNode);
-            currentNode = currentNode.parent;
-        }
-        totalPath.Reverse();
-        */
         return totalPath;
     }
 
@@ -171,9 +135,11 @@ public class Graph : MonoBehaviour
         foreach (var n in l) Debug.Log(txt + n.id);
     }
 
+    // For testing the Astar paths we make.
+    /*
     private void OnDrawGizmos()
     {
-        var path = AStar(Nodes[3], Nodes[18]);
+        var path = AStar(Nodes[7], Nodes[22]);
         var count = 0;
         for (var i = 0; i < path.Count; i++)
         {
@@ -184,4 +150,5 @@ public class Graph : MonoBehaviour
             count++;
         }
     }
+    */
 }
