@@ -173,7 +173,7 @@ public class Graph : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        var path = AStar(Nodes[7], Nodes[22]);
+        var path = AStar(Nodes[3], Nodes[18]);
         var count = 0;
         for (var i = 0; i < path.Count; i++)
         {
