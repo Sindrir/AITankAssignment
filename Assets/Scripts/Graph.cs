@@ -34,7 +34,7 @@ public class Graph : MonoBehaviour
     {
 
         List<GraphNode> openSet = new List<GraphNode>();
-        List<GraphNode> cameFrom = new List<GraphNode>();
+        GraphNode[] cameFrom = new GraphNode[100];
         List<GraphNode> closedSet = new List<GraphNode>();
         openSet.Add(startNode);
         List<GraphNode> testCameFrom = new List<GraphNode>();
@@ -44,8 +44,8 @@ public class Graph : MonoBehaviour
         float[] fScore = new float[100];
         for (int i = 0; i < 100; i++)
         {
-            gScore[i] = 1000;
-            fScore[i] = 1000;
+            gScore[i] = 1000000;
+            fScore[i] = 1000000;
         }
         gScore[startNode.id] = 0;
         fScore[startNode.id] = h(startNode, endNode);
@@ -68,10 +68,10 @@ public class Graph : MonoBehaviour
             {
                 // TODO Reconstruct the path
                // Debug.Log("winning current " + current.id);
-               var path = ReconstructPath(startNode, endNode);
+               var path = ReconstructPath(cameFrom, current);
                 //Debug.Log(path.Count);
                // Debug.Log("Path:");
-                foreach (var l in path)
+                //foreach (var l in path)
                  //   Debug.Log(l.id);
                // Debug.Log("The A* path");
                 return path;
@@ -90,14 +90,14 @@ public class Graph : MonoBehaviour
 
                 var edge = GetEdge(current, node);
                 var tentativeScore = gScore[current.id] + edge.Weight;
-                if(tentativeScore < gScore[node.id] || openSet.Contains(node))
+                if(tentativeScore < gScore[node.id])
                 {
-                    openSet.Remove(node);
                     //if (!cameFrom.Contains(current))
                     //    cameFrom.Add(current);
                     //else cameFrom[counter] = current;
 
                     //cameFrom[counter] = current;
+                    cameFrom[node.id] = current;
                     gScore[node.id] = tentativeScore;
                     fScore[node.id] = gScore[node.id] + h(node, endNode);
                     node.parent = current;
@@ -116,16 +116,25 @@ public class Graph : MonoBehaviour
         return null;
     }
 
-    private List<GraphNode> ReconstructPath(GraphNode start, GraphNode end)
+    private List<GraphNode> ReconstructPath(GraphNode[] cameFrom, GraphNode current)
     {
         List<GraphNode> totalPath = new List<GraphNode>();
+        totalPath.Add(current);
+
+        while (current)
+        {
+            current = cameFrom[current.id];
+            totalPath.Insert(0, current);
+        }
+
+
         //foreach (var node in cameFrom)
         //{
         //    totalPath.Add(node);
         //totalPath.Insert(0, node);
         //}
         //totalPath.Add(current);
-
+        /*
         GraphNode currentNode = end;
 
         while (currentNode != start)
@@ -134,6 +143,7 @@ public class Graph : MonoBehaviour
             currentNode = currentNode.parent;
         }
         totalPath.Reverse();
+        */
         return totalPath;
     }
 
@@ -159,5 +169,19 @@ public class Graph : MonoBehaviour
     private void debugger(List<GraphNode> l, string txt)
     {
         foreach (var n in l) Debug.Log(txt + n.id);
+    }
+
+    private void OnDrawGizmos()
+    {
+        var path = AStar(Nodes[7], Nodes[22]);
+        var count = 0;
+        for (var i = 0; i < path.Count; i++)
+        {
+            if (count != 0 && path[i - 1] != null)
+            {
+                Debug.DrawLine(path[i].transform.position, path[i - 1].transform.position, Color.blue);
+            }
+            count++;
+        }
     }
 }

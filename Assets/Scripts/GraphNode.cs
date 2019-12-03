@@ -33,7 +33,11 @@ public class GraphNode : MonoBehaviour
         if (HasAdjacent())
             foreach (var node in Adjacent)
             {
-                Debug.DrawLine(node.transform.position, transform.position, Color.red);
+                var position = node.transform.position;
+                var position2 = transform.position;
+                position.y = position.y - 1;
+                position2.y = position2.y - 1;
+                Debug.DrawLine(position, position2, Color.red);
             }
     }
 
